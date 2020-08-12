@@ -1,0 +1,33 @@
+container {
+    width: 364px;
+
+    border: 1px solid black;
+    display: inline-block;
+}
+block {
+    display: inline-block;
+    width: 100px;
+    height: 70px;
+    padding: 0.3rem;
+    font-weight: 500;
+    font-size: 40px;
+    color: #FF6533;
+    margin: 10px;
+    background: white;
+    border: 1px solid #B1CEE2;
+    border-radius: 0.3rem;
+    float: left;
+}
+block:hover {
+    color: #fff;
+    background-color: #005E6A;
+    border-color: #005E6A;
+    cursor: pointer;
+  }
+
+block[v2] {
+    height: 210px;
+}
+block[h2] {
+    width: 220px;
+}

@@ -1,0 +1,279 @@
+﻿@using Microsoft.AspNetCore.Components
+@using System.IO 
+@using System.Threading  
+@using MoneyChanger.Data
+
+@inject BillAcceptor acceptor
+@inject Transaksi transaksi
+@inject TimerSet timer  
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 order-2 order-lg-1 hero-img justify-content-center" data-aos="fade-up">
+                <div>
+                    <h3 style="color: #00529C; text-align: center; margin-top: -2rem;">Please Insert foreign banknotes to the banknotes slit below one by one</h3>
+                    <h3 style="color: #fa2828; text-align: center;">Once you insert a foreign banknote, it cannot be returned</h3>
+                </div>
+            </div>
+
+            <div class="col-xl-6 pt-5 pt-lg-0 order-1 order-lg-2 d-flex flex-column justify-content-center" data-aos="fade-right" style="margin-top: 1%;">
+                <small class="text-muted" style="color: #455F76; font-size: 25px; font-weight: 500;">From</small>
+                <table class="table">
+                    <thead>
+                        <tr style="font-weight: bold;">
+                            <th scope="col">PCS</th>
+                            <th scope="col">Code Currency</th>
+                            <th scope="col">BankNote</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">@jumlahlembar</th>
+                            <td>@tipeuang</td>
+                            <td>@nilaiuang</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr style="background-color: rgb(219, 219, 219); font-weight: bold;">
+                            <th scope="row">Total</th>
+                            <td>
+                                <ul style="color: black;">@tipeuang @nilaiuang</ul>
+                                <ul style="color: black;"></ul>
+                            </td>
+                            <td>
+                                <ul style="color: black;"></ul>
+                                <ul style="color: black;"></ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-xl-6 pt-5 pt-lg-0 order-1 order-lg-3 d-flex flex-column" data-aos="fade-left" style="margin-top: 1%;">
+                <small class="text-muted" style="color: #455F76; font-size: 25px; font-weight: 500;">To</small>
+                <table class="table">
+                    <thead>
+                        <tr style="font-weight: bold;">
+                            <th scope="col">Code Currency</th>
+                            <th scope="col">Amount Received</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">IDR</th>
+                            <td>Rp @totaluang</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="fixed-bottom">
+    <div class="container" style="display: flex;">
+        <div class="col-xl-2 order-1 order-lg-1">
+            <button type="button" class="btn btn-primary" style="background-color: #4E4E4E;" @onclick="Passport">Back</button>
+        </div>
+        <div class="col-xl-8 order-2 order-lg-2">
+            <ol class="track-progress" style="margin-left: 0%; margin-bottom: 2%;">
+                <li class="done">
+                    <em>1</em>
+                    <span>Currency</span>
+                </li>
+                <li class="done">
+                    <em>2</em>
+                    <span>T & C</span>
+                </li>
+                <li class="done">
+                    <em>3</em>
+                    <span>Menu</span>
+                </li>
+                <li class="done">
+                    <em>4</em>
+                    <span>Verification</span>
+                </li>
+                <li class="done">
+                    <em>5</em>
+                    <span>Insert Money</span>
+                </li>
+                <li class="todo">
+                    <em>6</em>
+                    <span>Done</span>
+                </li>
+            </ol>
+        </div>
+        <div class="col-xl-2 order-3 order-lg-3">
+            <button type="button" class="btn btn-primary" style="float: right;" @onclick="TransactionConfirmation">Continue</button>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+
+    private string datatext;
+    private static string datapath = @"C:\PercobaanNulisLog\NulisLogData.txt";
+    private string[] data;
+    //private string[] uang1 = new string[4];
+    //private string[] uang2 = new string[4];
+    //private string[] uang3 = new string[4];
+    //private string[] uang4 = new string[4];
+    //private string tipeuang1 = string.Empty;
+    //private string tipeuang2 = string.Empty;
+    //private string tipeuang3 = string.Empty;
+    //private string tipeuang4 = string.Empty;
+    //private string totaluang = string.Empty;
+    private int jumlahlembar = 0;
+    private string tipeuang = string.Empty;
+    private string nilaiuang = string.Empty;
+    private string convertuang = string.Empty;
+    private string totaluang = string.Empty;
+    private int uangtotal;
+    private string total = string.Empty;
+    private bool readflag = false;
+    private int time = 1000;
+    //private bool flag = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        readflag = true;
+        timer.SetTimer(time);
+        timer.onelapsed += TimeHandle;
+        //await BacaLog();
+        //datatext = File.ReadAllText(datapath);
+        //data = datatext.Split("\r\n\r\n");
+        //for(int i = 0; i < 4; i++)
+        //{
+        //    if(i == 0)
+        //    {
+        //        tipeuang = data[i];
+        //    }
+        //    else if (i == 1)
+        //    {
+        //        nilaiuang = data[i];
+        //    }
+        //    else if (i == 2)
+        //    {
+        //        convertuang = data[i];
+        //    }
+        //    else
+        //    {
+        //        totaluang = data[i];
+        //    }
+        //}
+        //transaksi.AddListAcceptor(tipeuang, nilaiuang);
+
+        //uangtotal = Convert.ToInt32(totaluang);
+        //total = uangtotal.ToString("N0");
+
+        //do
+        //{
+        //    timer.SetTimer(time);
+        //    timer.onelapsed += TimeHandle;
+        //    Console.WriteLine("TIMER REFRESH START");
+        //    flag = true;
+        //} while (flag == true);
+        
+    }
+
+    private void TimeHandle()
+    {
+        if (readflag)
+        {
+            Console.WriteLine("TIMER REFRESH");
+            InvokeAsync(StateHasChanged);
+            //OnClick.InvokeAsync("insertmoney");
+        }
+    }
+
+    private async Task BacaLog()
+    {
+        do
+        {
+            datatext = File.ReadAllText(datapath);
+            data = datatext.Split(",");
+            for (int i = 0; i < 2; i++)
+            {
+                if (i == 0)
+                {
+                    tipeuang = data[i];
+                }
+                else if (i == 1)
+                {
+                    nilaiuang = data[i];
+                }
+                //else if (i == 2)
+                //{
+                //    convertuang = data[i];
+                //}
+                //else
+                //{
+                //    totaluang = data[i];
+                //}
+            }
+            transaksi.AddListAcceptor(tipeuang, nilaiuang);
+        } while (readflag);
+    }
+
+    //private void TimeHandle()
+    //{
+    //    datatext = File.ReadAllText(datapath);
+    //    data = datatext.Split("\r\n\r\n");
+    //    for (int i = 0; i < 4; i++)
+    //    {
+    //        if (i == 0)
+    //        {
+    //            tipeuang = data[i];
+    //        }
+    //        else if (i == 1)
+    //        {
+    //            nilaiuang = data[i];
+    //        }
+    //        else if (i == 2)
+    //        {
+    //            convertuang = data[i];
+    //        }
+    //        else
+    //        {
+    //            totaluang = data[i];
+    //        }
+    //    }
+    //    transaksi.AddListAcceptor(tipeuang, nilaiuang, convertuang);
+    //    transaksi.AddTotalUang(totaluang);
+    //    Console.WriteLine(totaluang);
+    //}
+
+    private void Passport()
+    {
+        OnClick.InvokeAsync("passport");
+        acceptor.KillProcess();
+        //flag = false;
+    }
+
+    private void TransactionConfirmation()
+    {
+        OnClick.InvokeAsync("transactionconfirmation");
+        //flag = false;
+    }
+}

@@ -1,0 +1,137 @@
+﻿@using Microsoft.AspNetCore.Components
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 order-2 order-lg-1 hero-img justify-content-center" data-aos="fade-up">
+                <div>
+                    <h3 style="color: #00529C; text-align: center; margin-top: -2rem;">Please Insert foreign banknotes to the banknotes slit below one by one</h3>
+                    <h3 style="color: #fa2828; text-align: center;">Once you insert a foreign banknote, it cannot be returned</h3>
+                </div>
+            </div>
+
+            <div class="col-xl-6 pt-5 pt-lg-0 order-1 order-lg-2 d-flex flex-column justify-content-center" data-aos="fade-right" style="margin-top: 1%;">
+                <small class="text-muted" style="color: #455F76; font-size: 25px; font-weight: 500;">From</small>
+                <table class="table">
+                    <thead>
+                        <tr style="font-weight: bold;">
+                            <th scope="col">PCS</th>
+                            <th scope="col">Code Currency</th>
+                            <th scope="col">BankNote</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>SGD</td>
+                            <td>200</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>USD</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>AUD</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>JPY</td>
+                            <td>250</td>
+                        </tr>
+                        <tr style="background-color: rgb(219, 219, 219); font-weight: bold;">
+                            <th scope="row">Total</th>
+                            <td>
+                                <ul style="color: black;">SGD 200</ul>
+                                <ul style="color: black;">USD 50</ul>
+                            </td>
+                            <td>
+                                <ul style="color: black;">AUD 75</ul>
+                                <ul style="color: black;">JPY 750</ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-xl-6 pt-5 pt-lg-0 order-1 order-lg-3 d-flex flex-column" data-aos="fade-left" style="margin-top: 1%;">
+                <small class="text-muted" style="color: #455F76; font-size: 25px; font-weight: 500;">To</small>
+                <table class="table">
+                    <thead>
+                        <tr style="font-weight: bold;">
+                            <th scope="col">Code Currency</th>
+                            <th scope="col">Amount Received</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">IDR</th>
+                            <td>Rp 2.500.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+<!-- ======= Footer ======= -->
+<footer id="footer" class="fixed-bottom">
+    <div class="container" style="display: flex;">
+        <div class="col-xl-2 order-1 order-lg-1">
+            <button type="button" class="btn btn-primary" style="background-color: #4E4E4E;" @onclick="Ektp">Back</button>
+        </div>
+        <div class="col-xl-8 order-2 order-lg-2">
+            <ol class="track-progress" style="margin-left: 0%; margin-bottom: 2%;">
+                <li class="done">
+                    <em>1</em>
+                    <span>Currency</span>
+                </li>
+                <li class="done">
+                    <em>2</em>
+                    <span>T & C</span>
+                </li>
+                <li class="done">
+                    <em>3</em>
+                    <span>Menu</span>
+                </li>
+                <li class="done">
+                    <em>4</em>
+                    <span>Verification</span>
+                </li>
+                <li class="done">
+                    <em>5</em>
+                    <span>Insert Money</span>
+                </li>
+                <li class="todo">
+                    <em>6</em>
+                    <span>Done</span>
+                </li>
+            </ol>
+        </div>
+        <div class="col-xl-2 order-3 order-lg-3">
+            <button type="button" class="btn btn-primary" style="float: right;" @onclick="TransactionConfirmationEktp">Continue</button>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+
+    private void Ektp()
+    {
+        OnClick.InvokeAsync("ektp");
+    }
+
+    private void TransactionConfirmationEktp()
+    {
+        OnClick.InvokeAsync("transactionconfirmationektp");
+    }
+
+}

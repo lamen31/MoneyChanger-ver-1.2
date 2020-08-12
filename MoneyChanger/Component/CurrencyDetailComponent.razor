@@ -1,0 +1,559 @@
+﻿@using Microsoft.AspNetCore.Components
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 order-1 order-lg-2 hero-img justify-content-center" data-aos="fade-up">
+                <div>
+                    <h3 style="color: #00529C; text-align: center;">Available Currency to Exchange</h3>
+
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/eur.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">EUR</h5>
+                                                    <small class="text-muted">Euro</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/usd.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -3rem;">
+                                                    <h5 class="card-title">USD</h5>
+                                                    <small class="text-muted" style="margin-right: -5rem;">United States Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/gbp.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">GBP</h5>
+                                                    <small class="text-muted">Pound Sterling</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/aud.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -1rem;">
+                                                    <h5 class="card-title">AUD</h5>
+                                                    <small class="text-muted">Australian Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/thb.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">THB</h5>
+                                                    <small class="text-muted">Thai Baht</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/jpy.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">JPY</h5>
+                                                    <small class="text-muted">Japanese Yen</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/cny.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">CNY</h5>
+                                                    <small class="text-muted">Chinese Yuan</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/php.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">PHP</h5>
+                                                    <small class="text-muted">Philippine Peso</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/hkd.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -1rem;">
+                                                    <h5 class="card-title">HKD</h5>
+                                                    <small class="text-muted">Hongkong Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/sgd.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -2rem;">
+                                                    <h5 class="card-title">SGD</h5>
+                                                    <small class="text-muted">Singapore Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/myr.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -2rem;">
+                                                    <h5 class="card-title">MYR</h5>
+                                                    <small class="text-muted">Malaysian Ringgit</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/twd.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">TWD</h5>
+                                                    <small class="text-muted">Taiwan Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/eur.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">EUR</h5>
+                                                    <small class="text-muted">Euro</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/usd.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -3rem;">
+                                                    <h5 class="card-title">USD</h5>
+                                                    <small class="text-muted" style="margin-right: -5rem;">United States Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/gbp.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">GBP</h5>
+                                                    <small class="text-muted">Pound Sterling</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/aud.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -1rem;">
+                                                    <h5 class="card-title">AUD</h5>
+                                                    <small class="text-muted">Australian Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/thb.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">THB</h5>
+                                                    <small class="text-muted">Thai Baht</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/jpy.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">JPY</h5>
+                                                    <small class="text-muted">Japanese Yen</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/cny.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">CNY</h5>
+                                                    <small class="text-muted">Chinese Yuan</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/php.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
+                                                    <h5 class="card-title">PHP</h5>
+                                                    <small class="text-muted">Philippine Peso</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/hkd.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -1rem;">
+                                                    <h5 class="card-title">HKD</h5>
+                                                    <small class="text-muted">Hongkong Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/sgd.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -2rem;">
+                                                    <h5 class="card-title">SGD</h5>
+                                                    <small class="text-muted">Singapore Dollars</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3" style="max-width: 380px; margin-left: 1%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3">
+                                                <img src="assets/img/flag/myr.png" style="width: 60%; margin-top: 17%;">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-body" style="text-align:left;  margin-left: -1.5rem; margin-right: -2rem;">
+                                                    <h5 class="card-title">MYR</h5>
+                                                    <small class="text-muted">Malaysian Ringgit</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card-body" style="text-align:right;">
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev2" href="#carouselExampleIndicators" role="button" data-slide="prev" style="margin-left: -7rem;">
+                            <span class="carousel-control-prev2-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next2" href="#carouselExampleIndicators" role="button" data-slide="next" style="margin-right: -7rem;">
+                            <span class="carousel-control-next2-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="fixed-bottom">
+    <div class="container" style="display: flex;">
+        <div class="col-xl-2 order-1 order-lg-1">
+            <button type="button" class="btn btn-primary" style="background-color: #4E4E4E;" @onclick="Home">Back</button>
+        </div>
+        <div class="col-xl-8 order-2 order-lg-2">
+            <ol class="track-progress" style="margin-left: 0%; margin-bottom: 2%;">
+                <li class="done">
+                    <em>1</em>
+                    <span>Currency</span>
+                </li>
+                <li class="todo">
+                    <em>2</em>
+                    <span>T & C</span>
+                </li>
+                <li class="todo">
+                    <em>3</em>
+                    <span>Menu</span>
+                </li>
+                <li class="todo">
+                    <em>4</em>
+                    <span>Verification</span>
+                </li>
+                <li class="todo">
+                    <em>5</em>
+                    <span>Insert Money</span>
+                </li>
+                <li class="todo">
+                    <em>6</em>
+                    <span>Done</span>
+                </li>
+            </ol>
+        </div>
+        <div class="col-xl-2 order-3 order-lg-3">
+            <button type="button" class="btn btn-primary" style="float: right;" @onclick="TermCondition">Continue</button>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+
+    private void Home()
+    {
+        OnClick.InvokeAsync("home");
+    }
+
+    private void TermCondition()
+    {
+        OnClick.InvokeAsync("termcondition");
+    }
+
+}

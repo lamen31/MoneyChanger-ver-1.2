@@ -1,0 +1,155 @@
+﻿@using Microsoft.AspNetCore.Components
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 order-2 order-lg-1 hero-img justify-content-center" data-aos="fade-up">
+                <div>
+                    <h3 style="color: #00529C; text-align: center; margin-top: -2rem;">Confirm Your Transaction</h3>
+                </div>
+                <div class="row" style="margin-top: 5%;">
+                    <div class="col-xl-6" style="margin-right: -3.5rem;" data-aos="fade-right">
+                        <div class="card">
+                            <table class="table">
+                                <thead>
+                                    <tr style="font-weight: bold;">
+                                        <th scope="col">Code Currency</th>
+                                        <th scope="col">BankNote</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SGD</td>
+                                        <td>200</td>
+                                    </tr>
+                                    <tr>
+                                        <td>USD</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AUD</td>
+                                        <td>75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>JPY</td>
+                                        <td>750</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <img src="assets/img/next.png" style="width: 100%; margin-top: 1rem;">
+                    </div>
+                    <div class="col-xl-5" style="margin-left: -3.5rem; z-index: -1;">
+                        <div class="card" style="background-color: rgb(244, 249, 255);" data-aos="fade-left">
+                            <table class="table">
+                                <thead>
+                                    <tr style="font-weight: bold;">
+                                        <th scope="col">Code Currency</th>
+                                        <th scope="col">Your Money</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">IDR</th>
+                                        <td><b style="color: rgb(115, 218, 12);"> Rp 2.500.000</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+
+@if (isVisible)
+{
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div> -->
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary" style="margin-top: 4%;"></div>
+                    <h3 style="color: black;"><br>Please Wait</h3>
+                    <h3 style="color: black;">the process is running...</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="fixed-bottom">
+    <div class="container" style="display: flex;">
+        <div class="col-xl-2 order-1 order-lg-1">
+            <button type="button" class="btn btn-outline-primary" style="margin-left: -1rem;" @onclick="InsertMoneyEktp">Add Money</button>
+        </div>
+        <div class="col-xl-8 order-2 order-lg-2">
+            <ol class="track-progress" style="margin-left: 0%; margin-bottom: 2%;">
+                <li class="done">
+                    <em>1</em>
+                    <span>Currency</span>
+                </li>
+                <li class="done">
+                    <em>2</em>
+                    <span>T & C</span>
+                </li>
+                <li class="done">
+                    <em>3</em>
+                    <span>Menu</span>
+                </li>
+                <li class="done">
+                    <em>4</em>
+                    <span>Verification</span>
+                </li>
+                <li class="done">
+                    <em>5</em>
+                    <span>Insert Money</span>
+                </li>
+                <li class="todo">
+                    <em>6</em>
+                    <span>Done</span>
+                </li>
+            </ol>
+        </div>
+        <div class="col-xl-2 order-3 order-lg-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" id="myBtn1" @onclick="CheckVisible">
+                Exchange
+            </button>
+            <!-- <button type="button" class="btn btn-primary" style="float: right;" onclick="buttonLoad()" id="myBtn1">Exchange</button> -->
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+    private bool isVisible = false;
+
+    private void InsertMoneyEktp()
+    {
+        OnClick.InvokeAsync("insertmoneyektp");
+    }
+
+    private async Task CheckVisible()
+    {
+        isVisible = !isVisible;
+        await Task.Delay(10000);
+        isVisible = false;
+        OnClick.InvokeAsync("transactionsuccess");
+        //isVisible = false;
+        //StateHasChanged();
+    }
+
+}

@@ -1,0 +1,109 @@
+﻿@page "/"
+
+@using MoneyChanger.Component
+
+<div class="wrapper">
+    <div class="main-panel">
+        <!-- ======= Header ======= -->
+        <header id="header" class="fixed-top">
+            <div class="container d-flex">
+
+                <div class="logo mr-auto">
+                    <img src="assets/img/LogoTP.png">
+                </div>
+
+                <div class="header-social-links">
+                    <div class="clock-container">
+                        <div class="clock-col">
+                            <p class="clock-day clock-timer">&emsp;</p>
+                        </div>
+                        <!-- <div class="clock-col">
+                          <p id="date" class="clock-timer">
+                          </p>
+                        </div> -->
+                        <div class="clock-col">
+                            <p class="clock-hours clock-timer"></p>
+                        </div>
+                        <div class="clock-col">
+                            <p class="clock-minutes clock-timer"></p>
+                        </div>
+                        <div class="clock-col">
+                            <p class="clock-seconds clock-timer"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+        
+        @switch (message)
+        {
+            case "transactionsuccess":
+                {
+                    <TransactionSuccessComponent OnClick="ClickHandler"></TransactionSuccessComponent>
+                    break;
+                }
+            case "transactionconfirmation":
+                {
+                    <TransactionConfirmationComponent OnClick="ClickHandler"></TransactionConfirmationComponent>
+                    break;
+                }
+            case "transactionconfirmationektp":
+                {
+                    <TransactionConfirmationEktpComponent OnClick="ClickHandler"></TransactionConfirmationEktpComponent>
+                    break;
+                }
+            case "insertmoney":
+                {
+                    <InsertMoneyComponent OnClick="ClickHandler"></InsertMoneyComponent>
+                    break;
+                }
+            case "insertmoneyektp":
+                {
+                    <InsertMoneyEktpComponent OnClick="ClickHandler"></InsertMoneyEktpComponent>
+                    break;
+                }
+            case "ektp":
+                {
+                    <EKTPComponent OnClick="ClickHandler"></EKTPComponent>
+                    break;
+                }
+            case "passport":
+                {
+                    <PassportComponent OnClick="ClickHandler"></PassportComponent>
+                    break;
+                }
+            case "menuverification":
+                {
+                    <MenuVerificationComponent OnClick="ClickHandler"></MenuVerificationComponent>
+                    break;
+                }
+            case "termcondition":
+                {
+                    <TermConditionComponent OnClick="ClickHandler"></TermConditionComponent>
+                    break;
+                }
+            case "currencydetail":
+                {
+                    <CurrencyDetailComponent OnClick="ClickHandler"></CurrencyDetailComponent>
+                    break;
+                }
+            default:
+                {
+                    <HomeComponent OnClick="ClickHandler"></HomeComponent>
+                    break;
+                }
+        }
+
+    </div>
+</div>
+
+@code{
+    private string message = string.Empty;
+
+            void ClickHandler(string strmessage)
+            {
+                message = strmessage;
+            }
+
+        }
