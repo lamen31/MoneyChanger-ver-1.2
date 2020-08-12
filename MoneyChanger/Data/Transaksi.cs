@@ -21,6 +21,15 @@ namespace MoneyChanger.Data
             acceptor.Value = strvalue;
             listacceptor.Add(acceptor);
         }
+        public void RemoveListAcceptor(int intposition, int intrange)
+        {
+            listacceptor.RemoveRange(intposition, intrange);
+        }
+        public int CountListAcceptor()
+        {
+            int result = listacceptor.Count();
+            return result;
+        }
         public void AddTotalCash(string strtotalcash)
         {
             totalcash = strtotalcash;

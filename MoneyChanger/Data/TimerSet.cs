@@ -33,34 +33,43 @@ namespace MoneyChanger.Data
         public void TimeRefresh(object source, ElapsedEventArgs e)
         {
             int result;
+            int n = 1;
+            transaksi.AddTotalCash(totalcash.ToString());
             onelapsed?.Invoke();
             datatext = File.ReadAllText(datapath);
-            data = datatext.Split(",");
-            for (int i = 0; i < data.Length; i++)
+            if (datatext != "")
             {
-                if (i == 0)
-                    tipeuang = data[i];
-                if (i == 1)
-                    nilaiuang = data[i];
-                //string[] column = data[i].Split(",");
-                //for (int j = 0; j < column.Length; j++)
+                data = datatext.Split("\r\n");
+                for (int i = 0; i < data.Length; i++)
+                {
+                    //if (i == 0)
+                    //    tipeuang = data[i];
+                    //else if (i == 1)
+                    //    nilaiuang = data[i];
+                    string[] column = data[i].Split(",");
+                    for (int j = 0; j < column.Length; j++)
+                    {
+                        if (j == 0)
+                            tipeuang = column[j];
+                        if (j == 1)
+                            nilaiuang = column[j];
+                    }
+
+                    //result = ConvertCash(tipeuang, nilaiuang);
+                    //transaksi.AddTotalCash(result.ToString());
+                }
+                transaksi.AddListAcceptor(tipeuang, nilaiuang);
+                File.WriteAllText(datapath, "");
+                int count = transaksi.CountListAcceptor();
+                transaksi.RemoveListAcceptor(n, count-n);
+                //using (StreamWriter streamwriter = new StreamWriter(datapath))
                 //{
-                //    if (j == 0)
-                //        tipeuang = column[j];
-                //    if (j == 1)
-                //        nilaiuang = column[j];
+                //    streamwriter.WriteLine("");
                 //}
-                
-                //result = ConvertCash(tipeuang, nilaiuang);
-                //transaksi.AddTotalCash(result.ToString());
+                result = ConvertCash(tipeuang, nilaiuang);
+                transaksi.AddTotalCash(result.ToString());
+                n += 1;
             }
-            transaksi.AddListAcceptor(tipeuang, nilaiuang);
-            using (StreamWriter streamwriter = new StreamWriter(datapath))
-            {
-                streamwriter.WriteLine("");
-            }
-            result = ConvertCash(tipeuang, nilaiuang);
-            transaksi.AddTotalCash(result.ToString());
         }
         private int ConvertCash(string strtipe, string strnilai)
         {

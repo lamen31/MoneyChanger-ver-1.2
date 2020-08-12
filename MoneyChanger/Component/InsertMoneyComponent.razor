@@ -194,7 +194,7 @@
         //    Console.WriteLine("TIMER REFRESH START");
         //    flag = true;
         //} while (flag == true);
-        
+
     }
 
     private void TimeHandle()
@@ -207,34 +207,34 @@
         }
     }
 
-    private async Task BacaLog()
-    {
-        do
-        {
-            datatext = File.ReadAllText(datapath);
-            data = datatext.Split(",");
-            for (int i = 0; i < 2; i++)
-            {
-                if (i == 0)
-                {
-                    tipeuang = data[i];
-                }
-                else if (i == 1)
-                {
-                    nilaiuang = data[i];
-                }
-                //else if (i == 2)
-                //{
-                //    convertuang = data[i];
-                //}
-                //else
-                //{
-                //    totaluang = data[i];
-                //}
-            }
-            transaksi.AddListAcceptor(tipeuang, nilaiuang);
-        } while (readflag);
-    }
+    //private async Task BacaLog()
+    //{
+    //    do
+    //    {
+    //        datatext = File.ReadAllText(datapath);
+    //        data = datatext.Split(",");
+    //        for (int i = 0; i < 2; i++)
+    //        {
+    //            if (i == 0)
+    //            {
+    //                tipeuang = data[i];
+    //            }
+    //            else if (i == 1)
+    //            {
+    //                nilaiuang = data[i];
+    //            }
+    //            //else if (i == 2)
+    //            //{
+    //            //    convertuang = data[i];
+    //            //}
+    //            //else
+    //            //{
+    //            //    totaluang = data[i];
+    //            //}
+    //        }
+    //        transaksi.AddListAcceptor(tipeuang, nilaiuang);
+    //    } while (readflag);
+    //}
 
     //private void TimeHandle()
     //{
