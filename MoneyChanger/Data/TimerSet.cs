@@ -12,12 +12,15 @@ namespace MoneyChanger.Data
     {
         private Timer time;
         private Transaksi transaksi = new Transaksi();
+        private Function function = new Function();
         private int totalcash = 0;
         private string datatext;
         private string[] data;
         private string[] column;
         private string tipeuang;
         private string nilaiuang;
+        private int listpointer = 1;
+        private bool looping = false;
         private static string datapath = @"C:\PercobaanNulisLog\NulisLogDataDummy.txt";
         private static string datakosong = @"C:\PercobaanNulisLog\NulisLogDataKosong.txt";
         private static string datakosong1 = @"C:\PercobaanNulisLog\NulisLogDataKosong1.txt";
@@ -34,10 +37,11 @@ namespace MoneyChanger.Data
         {
             int result;
             int n = 1;
+            looping = true;
             transaksi.AddTotalCash(totalcash.ToString());
             onelapsed?.Invoke();
             datatext = File.ReadAllText(datapath);
-            if (datatext != "")
+            if (datatext != "" && listpointer < listpointer+1)
             {
                 data = datatext.Split("\r\n");
                 for (int i = 0; i < data.Length; i++)
@@ -61,19 +65,33 @@ namespace MoneyChanger.Data
                 transaksi.AddListAcceptor(tipeuang, nilaiuang);
                 File.WriteAllText(datapath, "");
                 int count = transaksi.CountListAcceptor();
-                transaksi.RemoveListAcceptor(n, count-n);
+                transaksi.RemoveListAcceptor(listpointer, count-listpointer);
                 //using (StreamWriter streamwriter = new StreamWriter(datapath))
                 //{
                 //    streamwriter.WriteLine("");
                 //}
-                result = ConvertCash(tipeuang, nilaiuang);
-                transaksi.AddTotalCash(result.ToString());
-                n += 1;
+                //if(looping)
+                //{
+                //    result = ConvertCash(tipeuang, nilaiuang);
+                //    transaksi.AddTotalCash(result.ToString());
+                //    looping;
+                //}
+                while(looping)
+                {
+                    result = ConvertCash(tipeuang, nilaiuang);
+                    n += 1;
+                    if(n < 2)
+                        transaksi.AddTotalCash(result.ToString());
+                    looping = false;
+                }
+                listpointer += 1;
+                //n += 1;
             }
         }
         private int ConvertCash(string strtipe, string strnilai)
         {
             int result;
+            int n = 1;
             int convert = Convert.ToInt32(strnilai);
             switch (strtipe)
             {
@@ -143,7 +161,9 @@ namespace MoneyChanger.Data
                         break;
                     }
             }
-            totalcash += convert;
+            if(n < 2)
+                totalcash += convert;
+            n += 1;
             result = totalcash;
             return result;
         }

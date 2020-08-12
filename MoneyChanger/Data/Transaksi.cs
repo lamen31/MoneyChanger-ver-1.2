@@ -34,5 +34,9 @@ namespace MoneyChanger.Data
         {
             totalcash = strtotalcash;
         }
+        public void Clear()
+        {
+            totalcash = string.Empty;
+        }
     }
 }

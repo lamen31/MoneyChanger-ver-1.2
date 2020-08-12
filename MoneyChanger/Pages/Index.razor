@@ -1,6 +1,9 @@
 ﻿@page "/"
 
 @using MoneyChanger.Component
+@using MoneyChanger.Data
+
+@inject Transaksi transaksi
 
 <div class="wrapper">
     <div class="main-panel">
@@ -101,9 +104,13 @@
 @code{
     private string message = string.Empty;
 
-            void ClickHandler(string strmessage)
-            {
-                message = strmessage;
-            }
+    void ClickHandler(string strmessage)
+    {
+        message = strmessage;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        transaksi.Clear();
+    }
 
-        }
+}

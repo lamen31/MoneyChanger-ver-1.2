@@ -77,7 +77,7 @@
                     <tbody>
                         <tr>
                             <th scope="row">IDR</th>
-                            <td>Rp @totaluang</td>
+                            <td>Rp @transaksi.totalcash</td>
                         </tr>
                     </tbody>
                 </table>
@@ -147,10 +147,10 @@
     private int jumlahlembar = 0;
     private string tipeuang = string.Empty;
     private string nilaiuang = string.Empty;
-    private string convertuang = string.Empty;
-    private string totaluang = string.Empty;
-    private int uangtotal;
-    private string total = string.Empty;
+    //private string convertuang = string.Empty;
+    private string totaluang;
+    //private int uangtotal;
+    //private string total = string.Empty;
     private bool readflag = false;
     private int time = 1000;
     //private bool flag = false;
@@ -203,7 +203,21 @@
         {
             Console.WriteLine("TIMER REFRESH");
             InvokeAsync(StateHasChanged);
+            //totaluang = transaksi.totalcash;
+            //ConvertCash();
             //OnClick.InvokeAsync("insertmoney");
+        }
+    }
+
+    private void ConvertCash()
+    {
+        int count = transaksi.CountListAcceptor();
+        for(int i = 0; i < count; i++)
+        {
+            tipeuang = transaksi.listacceptor[i].Type;
+            nilaiuang = transaksi.listacceptor[i].Value;
+            //totaluang = function.ConvertCash(tipeuang, nilaiuang);
+            transaksi.AddTotalCash(totaluang.ToString());
         }
     }
 

@@ -32,6 +32,7 @@ namespace MoneyChanger
             services.AddScoped<BillAcceptor>();
             services.AddScoped<Transaksi>();
             services.AddScoped<TimerSet>();
+            services.AddSingleton<Function>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
