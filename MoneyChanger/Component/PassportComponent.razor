@@ -3,6 +3,8 @@
 @using MoneyChanger.Data
 
 @inject BillAcceptor acceptor
+@inject PassportReader passport
+@inject PassportReaderTransaksi passporttransaksi
 
 <!-- ======= Hero Section ======= -->
 <section id="hero" style="margin-top: 50px;">
@@ -11,23 +13,46 @@
         <div class="row">
             <div class="col-xl-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
                 <h3 style="color: #00529C;">Please Insert Your Passport</h3>
-                <table style="margin-top: 9%;">
-                    <tr>
-                        <td><h3 style="font-weight: bold;"> Passport No </h3></td>
-                        <td><h3 style="font-weight: bold;">:&emsp;</h3></td>
-                        <td><h3 style="font-weight: bold;">02480327487328</h3><br></td>
-                    </tr>
-                    <tr>
-                        <td><h3 style="font-weight: bold;"> Full Name</h3></td>
-                        <td><h3 style="font-weight: bold;">:</h3></td>
-                        <td><h3 style="font-weight: bold;">Bambang Pamungkas</h3><br></td>
-                    </tr>
-                    <tr>
-                        <td><h3 style="font-weight: bold;"> Nationality</h3></td>
-                        <td><h3 style="font-weight: bold;">:</h3></td>
-                        <td><h3 style="font-weight: bold;">Taiwan</h3><br></td>
-                    </tr>
-                </table>
+                @if (passporttransaksi != null)
+                {
+                    <table style="margin-top: 9%;">
+                        <tr>
+                            <td><h3 style="font-weight: bold;"> Passport No </h3></td>
+                            <td><h3 style="font-weight: bold;">:&emsp;</h3></td>
+                            <td><h3 style="font-weight: bold;">@passporttransaksi.stringMRZ2</h3><br></td>
+                        </tr>
+                        <tr>
+                            <td><h3 style="font-weight: bold;"> Full Name</h3></td>
+                            <td><h3 style="font-weight: bold;">:</h3></td>
+                            <td><h3 style="font-weight: bold;">@passporttransaksi.stringName</h3><br></td>
+                        </tr>
+                        <tr>
+                            <td><h3 style="font-weight: bold;"> Nationality</h3></td>
+                            <td><h3 style="font-weight: bold;">:</h3></td>
+                            <td><h3 style="font-weight: bold;">@passporttransaksi.stringNationality</h3><br></td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <table style="margin-top: 9%;">
+                        <tr>
+                            <td><h3 style="font-weight: bold;"> Passport No </h3></td>
+                            <td><h3 style="font-weight: bold;">:&emsp;</h3></td>
+                            <td><h3 style="font-weight: bold;"></h3><br></td>
+                        </tr>
+                        <tr>
+                            <td><h3 style="font-weight: bold;"> Full Name</h3></td>
+                            <td><h3 style="font-weight: bold;">:</h3></td>
+                            <td><h3 style="font-weight: bold;"></h3><br></td>
+                        </tr>
+                        <tr>
+                            <td><h3 style="font-weight: bold;"> Nationality</h3></td>
+                            <td><h3 style="font-weight: bold;">:</h3></td>
+                            <td><h3 style="font-weight: bold;"></h3><br></td>
+                        </tr>
+                    </table>
+                }
             </div>
             <div class="col-xl-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
                 <img src="assets/img/insert-passport.png" class="img-fluid" alt="">
@@ -87,6 +112,17 @@
     private string nilaiuang = "0";
     private string nilaiconvert = "0";
     private string totaluang = "0";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000);
+        await PRFetch();
+    }
+
+    private async Task PRFetch()
+    {
+        passporttransaksi = passport.GetPRData();
+    }
 
     private void MenuVerification()
     {

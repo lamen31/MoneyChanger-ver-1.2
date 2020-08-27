@@ -33,6 +33,8 @@ namespace MoneyChanger
             services.AddScoped<Transaksi>();
             services.AddScoped<TimerSet>();
             services.AddSingleton<Function>();
+            services.AddSingleton<PassportReader>();
+            services.AddScoped<PassportReaderTransaksi>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
