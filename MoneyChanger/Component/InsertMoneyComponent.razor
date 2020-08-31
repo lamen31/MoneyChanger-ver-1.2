@@ -30,26 +30,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">@jumlahlembar</th>
-                            <td>@tipeuang</td>
-                            <td>@nilaiuang</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        @foreach (dynamic lacc in transaksi.listacceptor)
+                        {
+                            <tr>
+                                <th scope="row">@lacc.Count.ToString()</th>
+                                <th>@lacc.Type</th>
+                                <th>@lacc.Value</th>
+                            </tr>
+                        }
+                        @*<tr>
+            <th scope="row">@jumlahlembar</th>
+            <td>@tipeuang</td>
+            <td>@nilaiuang</td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+        </tr>*@
                         <tr style="background-color: rgb(219, 219, 219); font-weight: bold;">
                             <th scope="row">Total</th>
                             <td>
@@ -135,158 +143,152 @@
     private string datatext;
     private static string datapath = @"C:\PercobaanNulisLog\NulisLogData.txt";
     private string[] data;
-    //private string[] uang1 = new string[4];
-    //private string[] uang2 = new string[4];
-    //private string[] uang3 = new string[4];
-    //private string[] uang4 = new string[4];
-    //private string tipeuang1 = string.Empty;
-    //private string tipeuang2 = string.Empty;
-    //private string tipeuang3 = string.Empty;
-    //private string tipeuang4 = string.Empty;
-    //private string totaluang = string.Empty;
     private int jumlahlembar = 0;
     private string tipeuang = string.Empty;
     private string nilaiuang = string.Empty;
-    //private string convertuang = string.Empty;
-    private string totaluang;
-    //private int uangtotal;
-    //private string total = string.Empty;
+    private int totaluang;
     private bool readflag = false;
     private int time = 1000;
-    //private bool flag = false;
+    private bool loopBill = false;
 
     protected override async Task OnInitializedAsync()
     {
-        readflag = true;
-        timer.SetTimer(time);
-        timer.onelapsed += TimeHandle;
-        //await BacaLog();
-        //datatext = File.ReadAllText(datapath);
-        //data = datatext.Split("\r\n\r\n");
-        //for(int i = 0; i < 4; i++)
-        //{
-        //    if(i == 0)
-        //    {
-        //        tipeuang = data[i];
-        //    }
-        //    else if (i == 1)
-        //    {
-        //        nilaiuang = data[i];
-        //    }
-        //    else if (i == 2)
-        //    {
-        //        convertuang = data[i];
-        //    }
-        //    else
-        //    {
-        //        totaluang = data[i];
-        //    }
-        //}
-        //transaksi.AddListAcceptor(tipeuang, nilaiuang);
-
-        //uangtotal = Convert.ToInt32(totaluang);
-        //total = uangtotal.ToString("N0");
-
-        //do
-        //{
-        //    timer.SetTimer(time);
-        //    timer.onelapsed += TimeHandle;
-        //    Console.WriteLine("TIMER REFRESH START");
-        //    flag = true;
-        //} while (flag == true);
-
+        //readflag = true;
+        //timer.SetTimer(time);
+        //timer.onelapsed += TimeHandle;
+        await Task.Delay(2000);
+        totaluang = 0;
+        transaksi.AddTotalCash(totaluang.ToString());
+        loopBill = true;
+        await BillAcceptor();
     }
 
-    private void TimeHandle()
+    private async Task BillAcceptor()
     {
-        if (readflag)
+        do
         {
-            Console.WriteLine("TIMER REFRESH");
-            InvokeAsync(StateHasChanged);
-            //totaluang = transaksi.totalcash;
-            //ConvertCash();
-            //OnClick.InvokeAsync("insertmoney");
-        }
+            await Task.Delay(200);
+            datatext = File.ReadAllText(datapath);
+            if (datatext != "")
+            {
+                data = datatext.Split(",");
+                for (int i = 0; i < data.Length; i++)
+                {
+                    if (i == 0)
+                        tipeuang = data[i];
+                    else if (i == 1)
+                        //nilaiuang = data[i].Substring(0,data[i].IndexOf("\r"));
+                        nilaiuang = data[i];
+                }
+                transaksi.AddListAcceptor(tipeuang, nilaiuang);
+                File.WriteAllText(datapath, "");
+
+                totaluang = ConvertCash(tipeuang, nilaiuang);
+                transaksi.AddTotalCash(totaluang.ToString());
+                StateHasChanged();
+            }
+        } while (loopBill);
     }
 
-    private void ConvertCash()
+    private int ConvertCash(string strtipe, string strnilai)
     {
-        int count = transaksi.CountListAcceptor();
-        for(int i = 0; i < count; i++)
+        int result;
+        int convert = Convert.ToInt32(strnilai);
+        switch (strtipe)
         {
-            tipeuang = transaksi.listacceptor[i].Type;
-            nilaiuang = transaksi.listacceptor[i].Value;
-            //totaluang = function.ConvertCash(tipeuang, nilaiuang);
-            transaksi.AddTotalCash(totaluang.ToString());
+            case "USD":
+                {
+                    convert = convert * 14000;
+                    break;
+                }
+            case "EUR":
+                {
+                    convert = convert * 16000;
+                    break;
+                }
+            case "JPY":
+                {
+                    convert = convert * 132;
+                    break;
+                }
+            case "CNY":
+                {
+                    convert = convert * 2000;
+                    break;
+                }
+            case "KRW":
+                {
+                    convert = convert * 12;
+                    break;
+                }
+            case "GBP":
+                {
+                    convert = convert * 18000;
+                    break;
+                }
+            case "AUD":
+                {
+                    convert = convert * 10000;
+                    break;
+                }
+            case "TWD":
+                {
+                    convert = convert * 477;
+                    break;
+                }
+            case "PHP":
+                {
+                    convert = convert * 282;
+                    break;
+                }
+            case "HKD":
+                {
+                    convert = convert * 2000;
+                    break;
+                }
+            case "SGD":
+                {
+                    convert = convert * 10000;
+                    break;
+                }
+            case "MYR":
+                {
+                    convert = convert * 3300;
+                    break;
+                }
+            case "THB":
+                {
+                    convert = convert * 453;
+                    break;
+                }
         }
+        totaluang += convert;
+        result = totaluang;
+        return result;
     }
-
-    //private async Task BacaLog()
-    //{
-    //    do
-    //    {
-    //        datatext = File.ReadAllText(datapath);
-    //        data = datatext.Split(",");
-    //        for (int i = 0; i < 2; i++)
-    //        {
-    //            if (i == 0)
-    //            {
-    //                tipeuang = data[i];
-    //            }
-    //            else if (i == 1)
-    //            {
-    //                nilaiuang = data[i];
-    //            }
-    //            //else if (i == 2)
-    //            //{
-    //            //    convertuang = data[i];
-    //            //}
-    //            //else
-    //            //{
-    //            //    totaluang = data[i];
-    //            //}
-    //        }
-    //        transaksi.AddListAcceptor(tipeuang, nilaiuang);
-    //    } while (readflag);
-    //}
 
     //private void TimeHandle()
     //{
-    //    datatext = File.ReadAllText(datapath);
-    //    data = datatext.Split("\r\n\r\n");
-    //    for (int i = 0; i < 4; i++)
+    //    if (readflag)
     //    {
-    //        if (i == 0)
-    //        {
-    //            tipeuang = data[i];
-    //        }
-    //        else if (i == 1)
-    //        {
-    //            nilaiuang = data[i];
-    //        }
-    //        else if (i == 2)
-    //        {
-    //            convertuang = data[i];
-    //        }
-    //        else
-    //        {
-    //            totaluang = data[i];
-    //        }
+    //        Console.WriteLine("TIMER REFRESH");
+    //        InvokeAsync(StateHasChanged);
+    //        //totaluang = transaksi.totalcash;
+    //        //ConvertCash();
+    //        //OnClick.InvokeAsync("insertmoney");
     //    }
-    //    transaksi.AddListAcceptor(tipeuang, nilaiuang, convertuang);
-    //    transaksi.AddTotalUang(totaluang);
-    //    Console.WriteLine(totaluang);
     //}
 
-    private void Passport()
+    private async Task Passport()
     {
+        loopBill = false;
         OnClick.InvokeAsync("passport");
-        acceptor.KillProcess();
         //flag = false;
     }
 
-    private void TransactionConfirmation()
+    private async Task TransactionConfirmation()
     {
+        loopBill = false;
         OnClick.InvokeAsync("transactionconfirmation");
         //flag = false;
     }

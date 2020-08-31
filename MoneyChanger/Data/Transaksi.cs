@@ -12,14 +12,31 @@ namespace MoneyChanger.Data
         {
             public string Type { get; set; }
             public string Value { get; set; }
+            public int Count { get; set; }
         }
         public List<Acceptor> listacceptor = new List<Acceptor>();
         public void AddListAcceptor(string strtype, string strvalue)
         {
             Acceptor acceptor = new Acceptor();
+            int laccCount = listacceptor.Count;
+            bool newBankNote = true;
             acceptor.Type = strtype;
             acceptor.Value = strvalue;
-            listacceptor.Add(acceptor);
+            acceptor.Count = 1;
+                for (int i = 0;i<laccCount;i++)
+                {
+                    if (acceptor.Type == listacceptor[i].Type)
+                    {
+                        if (acceptor.Value == listacceptor[i].Value)
+                        {
+                            listacceptor[i].Count += 1;
+                            newBankNote = false;
+                            break;
+                        }
+                    }
+                }
+                if(newBankNote)
+                listacceptor.Add(acceptor);
         }
         public void RemoveListAcceptor(int intposition, int intrange)
         {

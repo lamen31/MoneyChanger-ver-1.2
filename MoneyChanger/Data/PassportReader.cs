@@ -355,6 +355,9 @@ namespace MoneyChanger.Data
             passportdata.stringName = stringArrContent[0].Substring(0, stringArrContent[0].IndexOf("\0"));
             passportdata.stringMRZ2 = stringArrContent[1].Substring(0, stringArrContent[1].IndexOf("\0"));
             passportdata.stringNationality = stringArrContent[2].Substring(0, stringArrContent[2].IndexOf("\0"));
+            Console.WriteLine("Passport Name : " + passportdata.stringName);
+            Console.WriteLine("Passport MRZ : " + passportdata.stringMRZ2);
+            Console.WriteLine("Passport Nationality : " + passportdata.stringNationality);
             return passportdata;
         }
 

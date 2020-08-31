@@ -56,6 +56,7 @@
             </div>
             <div class="col-xl-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
                 <img src="assets/img/insert-passport.png" class="img-fluid" alt="">
+                <button class="btn btn-danger" @onclick="ScanPassport">Passport Scan</button>
             </div>
         </div>
     </div>
@@ -116,6 +117,10 @@
     protected override async Task OnInitializedAsync()
     {
         await Task.Delay(2000);
+    }
+
+    private async Task ScanPassport()
+    {
         await PRFetch();
     }
 
@@ -124,36 +129,16 @@
         passporttransaksi = passport.GetPRData();
     }
 
-    private void MenuVerification()
+    private async Task MenuVerification()
     {
         OnClick.InvokeAsync("menuverification");
     }
 
-    private void InsertMoney()
+    private async Task InsertMoney()
     {
+        //if(passporttransaksi.stringName != null && passporttransaksi.stringMRZ2 != null && passporttransaksi.stringNationality != null)
+        //{
         OnClick.InvokeAsync("insertmoney");
-        //acceptor.billacceptor();
-        //using (StreamWriter streamwriter = new StreamWriter(datapath))
-        //{
-        //    streamwriter.WriteLine("{0}, {1}", tipeuang, nilaiuang);
-        //}
-        //datatext = File.ReadAllText(datapath);
-        //using(StreamWriter streamwriter = new StreamWriter(datapath))
-        //{
-        //    streamwriter.WriteLine(datatext);
-        //    streamwriter.WriteLine(nilaiuang);
-        //}
-        //datatext = File.ReadAllText(datapath);
-        //using (StreamWriter streamwriter = new StreamWriter(datapath))
-        //{
-        //    streamwriter.WriteLine(datatext);
-        //    streamwriter.WriteLine(nilaiconvert);
-        //}
-        //datatext = File.ReadAllText(datapath);
-        //using (StreamWriter streamwriter = new StreamWriter(datapath))
-        //{
-        //    streamwriter.WriteLine(datatext);
-        //    streamwriter.WriteLine(totaluang);
         //}
     }
 

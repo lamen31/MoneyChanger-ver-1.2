@@ -2,6 +2,9 @@
 @using MoneyChanger.Data
 
 @inject BillAcceptor acceptor 
+@inject CashDispenser cashdispenser
+@inject Transaksi transaksi
+@inject Config config 
 
 <!-- ======= Hero Section ======= -->
     <section id="hero">
@@ -23,7 +26,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        @foreach(dynamic lacc in transaksi.listacceptor)
+                                        {
+                                            <tr>
+                                                <td>@lacc.Type</td>
+                                                <td>@lacc.Value</td>
+                                            </tr>
+                                        }
+                                        @*<tr>
                                             <td>SGD</td>
                                             <td>200</td>
                                         </tr>
@@ -38,7 +48,7 @@
                                         <tr>
                                             <td>JPY</td>
                                             <td>750</td>
-                                        </tr>
+                                        </tr>*@
                                     </tbody>
                                 </table>
                             </div>
@@ -143,6 +153,20 @@
     [Parameter]
     public EventCallback<string> OnClick { get; set; }
     private bool isVisible = false;
+    private int result;
+    private string readPort;
+    private int Port;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000);
+        result = Convert.ToInt32(transaksi.totalcash);
+        readPort = config.Read("PORT", Config.PARAM_PORT_CASH_DISPENSER);
+        Port = ushort.Parse(readPort);
+        cashdispenser.PortOpen(Port);
+        cashdispenser.Reset();
+        cashdispenser.Config();
+    }
 
     private void InsertMoney()
     {
@@ -152,6 +176,10 @@
     private async Task CheckVisible()
     {
         isVisible = !isVisible;
+        acceptor.KillProcess();
+        cashdispenser.SetResult(result);
+        cashdispenser.CashConvert();
+        cashdispenser.MultiDispense();
         await Task.Delay(5000);
         isVisible = false;
         OnClick.InvokeAsync("transactionsuccess");

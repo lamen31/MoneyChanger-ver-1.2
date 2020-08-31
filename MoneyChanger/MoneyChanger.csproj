@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="INIFileParser">
+      <HintPath>bin\Debug\netcoreapp3.1\INIFileParser.dll</HintPath>
+    </Reference>
     <Reference Include="LibraryBillAcceptor">
       <HintPath>LibraryBillAcceptor.dll</HintPath>
     </Reference>

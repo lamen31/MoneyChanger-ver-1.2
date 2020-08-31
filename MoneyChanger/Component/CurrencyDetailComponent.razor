@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components
+@using MoneyChanger.Data
+
+@inject Config config 
 
 <!-- ======= Hero Section ======= -->
 <section id="hero">
@@ -10,10 +13,10 @@
                     <h3 style="color: #00529C; text-align: center;">Available Currency to Exchange</h3>
 
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
+                        @*<ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        </ol>
+                        </ol>*@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row">
@@ -30,7 +33,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp @readEur</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -49,7 +52,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp @readUsd</h5>
                                                     <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
                                                 </div>
                                             </div>
@@ -68,7 +71,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -2rem;">Rp @readGbp</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -91,7 +94,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readAud</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -110,7 +113,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readThb</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -129,7 +132,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readJpy</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -152,7 +155,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readCny</h5>
                                                     <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
                                                 </div>
                                             </div>
@@ -171,7 +174,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readPhp</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -190,7 +193,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readHkd</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -212,7 +215,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readSgd</h5>
                                                     <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
                                                 </div>
                                             </div>
@@ -231,7 +234,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readMyr</h5>
                                                     <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                                 </div>
                                             </div>
@@ -250,7 +253,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card-body" style="text-align:right;">
-                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp 15.000</h5>
+                                                    <h5 class="card-title" style="color: #153D63; margin-left: -1rem;">Rp @readTwd</h5>
                                                     <small class="text-muted" style="color: #cd2b2b; font-weight: bold;">- 100</small>
                                                 </div>
                                             </div>
@@ -259,7 +262,7 @@
                                 </div>
                             </div>
 
-                            <div class="carousel-item">
+                            @*<div class="carousel-item">
                                 <div class="row">
                                     <div class="card mb-3" style="max-width: 380px; margin-left: 3%;">
                                         <div class="row no-gutters">
@@ -492,9 +495,9 @@
                         <a class="carousel-control-next2" href="#carouselExampleIndicators" role="button" data-slide="next" style="margin-right: -7rem;">
                             <span class="carousel-control-next2-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
-                        </a>
+                        </a>*@
                     </div>
-
+</div>
                 </div>
             </div>
         </div>
@@ -546,12 +549,41 @@
     [Parameter]
     public EventCallback<string> OnClick { get; set; }
 
-    private void Home()
+    private string readEur;
+    private string readAud;
+    private string readCny;
+    private string readSgd;
+    private string readUsd;
+    private string readThb;
+    private string readPhp;
+    private string readMyr;
+    private string readGbp;
+    private string readJpy;
+    private string readHkd;
+    private string readTwd;
+
+    protected override async Task OnInitializedAsync()
+    {
+        readEur = config.Read("CONVERSION", Config.PARAM_CONVERSION_EUR);
+        readAud = config.Read("CONVERSION", Config.PARAM_CONVERSION_AUD);
+        readCny = config.Read("CONVERSION", Config.PARAM_CONVERSION_CNY);
+        readSgd = config.Read("CONVERSION", Config.PARAM_CONVERSION_SGD);
+        readUsd = config.Read("CONVERSION", Config.PARAM_CONVERSION_USD);
+        readThb = config.Read("CONVERSION", Config.PARAM_CONVERSION_THB);
+        readPhp = config.Read("CONVERSION", Config.PARAM_CONVERSION_PHP);
+        readMyr = config.Read("CONVERSION", Config.PARAM_CONVERSION_MYR);
+        readGbp = config.Read("CONVERSION", Config.PARAM_CONVERSION_GBP);
+        readJpy = config.Read("CONVERSION", Config.PARAM_CONVERSION_JPY);
+        readHkd = config.Read("CONVERSION", Config.PARAM_CONVERSION_HKD);
+        readTwd = config.Read("CONVERSION", Config.PARAM_CONVERSION_TWD);
+    }
+
+    private async Task Home()
     {
         OnClick.InvokeAsync("home");
     }
 
-    private void TermCondition()
+    private async Task TermCondition()
     {
         OnClick.InvokeAsync("termcondition");
     }

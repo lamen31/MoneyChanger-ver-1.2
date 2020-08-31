@@ -87,17 +87,17 @@
     [Parameter]
     public EventCallback<string> OnClick { get; set; }
 
-    private void TermCondition()
+    private async Task TermCondition()
     {
         OnClick.InvokeAsync("termcondition");
     }
 
-    private void Passport()
+    private async Task Passport()
     {
         OnClick.InvokeAsync("passport");
     }
 
-    private void Ektp()
+    private async Task Ektp()
     {
         OnClick.InvokeAsync("ektp");
     }

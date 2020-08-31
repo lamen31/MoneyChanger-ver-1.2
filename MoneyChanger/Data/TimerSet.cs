@@ -21,7 +21,7 @@ namespace MoneyChanger.Data
         private string nilaiuang;
         private int listpointer = 1;
         private bool looping = false;
-        private static string datapath = @"C:\PercobaanNulisLog\NulisLogDataDummy.txt";
+        private static string datapath = @"C:\PercobaanNulisLog\NulisLogData.txt";
         private static string datakosong = @"C:\PercobaanNulisLog\NulisLogDataKosong.txt";
         private static string datakosong1 = @"C:\PercobaanNulisLog\NulisLogDataKosong1.txt";
 
