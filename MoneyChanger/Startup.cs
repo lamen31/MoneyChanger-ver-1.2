@@ -35,8 +35,10 @@ namespace MoneyChanger
             services.AddSingleton<Function>();
             services.AddSingleton<PassportReader>();
             services.AddScoped<PassportReaderTransaksi>();
-            services.AddSingleton<CashDispenser>();
+            services.AddScoped<CashDispenser>();
             services.AddScoped<Config>();
+            services.AddSingleton<EKTP_Utility>();
+            services.AddSingleton<EKtp_Sdk>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -136,10 +136,11 @@
 
     private async Task InsertMoney()
     {
-        //if(passporttransaksi.stringName != null && passporttransaksi.stringMRZ2 != null && passporttransaksi.stringNationality != null)
-        //{
-        OnClick.InvokeAsync("insertmoney");
-        //}
+        if (passporttransaksi.stringName != null && passporttransaksi.stringMRZ2 != null && passporttransaksi.stringNationality != null)
+        {
+            OnClick.InvokeAsync("insertmoney");
+        }
+        //OnClick.InvokeAsync("insertmoney");
     }
 
 }

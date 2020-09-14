@@ -68,7 +68,7 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">IDR</th>
-                                            <td><b style="color: rgb(115, 218, 12);"> Rp 2.500.000</b></td>
+                                            <td><b style="color: rgb(115, 218, 12);"> Rp @transaksi.totalcash</b></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -146,7 +146,26 @@
     </div>
 </footer><!-- End Footer -->
 
-
+@if (isVisible)
+{
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div> -->
+            <div class="modal-body text-center">
+                <div class="spinner-border text-primary" style="margin-top: 4%;"></div>
+                <h3 style="color: black;"><br>Mohon tunggu</h3>
+                <h3 style="color: black;">proses sedang berlangsung...</h3>
+            </div>
+        </div>
+    </div>
+</div>
+}
 
 
 @code {
@@ -161,11 +180,12 @@
     {
         await Task.Delay(2000);
         result = Convert.ToInt32(transaksi.totalcash);
-        readPort = config.Read("PORT", Config.PARAM_PORT_CASH_DISPENSER);
-        Port = ushort.Parse(readPort);
-        cashdispenser.PortOpen(Port);
-        cashdispenser.Reset();
-        cashdispenser.Config();
+
+        //readPort = config.Read("PORT", Config.PARAM_PORT_CASH_DISPENSER);
+        //Port = ushort.Parse(readPort);
+        //cashdispenser.PortOpen(Port);
+        //cashdispenser.Reset();
+        //cashdispenser.Config();
     }
 
     private void InsertMoney()
@@ -176,12 +196,15 @@
     private async Task CheckVisible()
     {
         isVisible = !isVisible;
+        await Task.Delay(100);
+        StateHasChanged();
         acceptor.KillProcess();
         cashdispenser.SetResult(result);
         cashdispenser.CashConvert();
         cashdispenser.MultiDispense();
         await Task.Delay(5000);
         isVisible = false;
+        StateHasChanged();
         OnClick.InvokeAsync("transactionsuccess");
     }
 

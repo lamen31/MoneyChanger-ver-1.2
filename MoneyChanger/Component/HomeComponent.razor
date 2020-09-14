@@ -1,10 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using MoneyChanger.Data
-@using System.IO 
+@using System.IO
 
-@inject BillAcceptor acceptor 
+@inject BillAcceptor acceptor
+@inject Transaksi transaksi
 @inject Config config
-
 <!-- ======= Hero Section ======= -->
 <section id="hero">
 
@@ -177,13 +177,13 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="card-body" style="text-align:left;  margin-left: -1.5rem;">
-                                            <h5 class="card-title">PHP</h5>
-                                            <small class="text-muted">Philippine Peso</small>
+                                            <h5 class="card-title">KRW</h5>
+                                            <small class="text-muted">South Korean Won</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card-body" style="text-align:right;">
-                                            <h5 class="card-title" style="color: #153D63;">Rp @readPhp</h5>
+                                            <h5 class="card-title" style="color: #153D63;">Rp @readKrw</h5>
                                             <small class="text-muted" style="color: #2BCD45; font-weight: bold;">+ 100</small>
                                         </div>
                                     </div>
@@ -335,28 +335,57 @@
     private string readSgd;
     private string readUsd;
     private string readThb;
-    private string readPhp;
+    private string readKrw;
     private string readMyr;
     private string readGbp;
     private string readJpy;
     private string readHkd;
     private string readTwd;
+    private string[] converter = new string[12];
 
     protected override async Task OnInitializedAsync()
     {
-        readEur = config.Read("CONVERSION", Config.PARAM_CONVERSION_EUR);
-        readAud = config.Read("CONVERSION", Config.PARAM_CONVERSION_AUD);
-        readCny = config.Read("CONVERSION", Config.PARAM_CONVERSION_CNY);
-        readSgd = config.Read("CONVERSION", Config.PARAM_CONVERSION_SGD);
-        readUsd = config.Read("CONVERSION", Config.PARAM_CONVERSION_USD);
-        readThb = config.Read("CONVERSION", Config.PARAM_CONVERSION_THB);
-        readPhp = config.Read("CONVERSION", Config.PARAM_CONVERSION_PHP);
-        readMyr = config.Read("CONVERSION", Config.PARAM_CONVERSION_MYR);
-        readGbp = config.Read("CONVERSION", Config.PARAM_CONVERSION_GBP);
-        readJpy = config.Read("CONVERSION", Config.PARAM_CONVERSION_JPY);
-        readHkd = config.Read("CONVERSION", Config.PARAM_CONVERSION_HKD);
-        readTwd = config.Read("CONVERSION", Config.PARAM_CONVERSION_TWD);
+        for (int i = 0; i < converter.Length; i++)
+        {
+            if (i == 0)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_EUR);
+            else if (i == 1)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_AUD);
+            else if (i == 2)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_CNY);
+            else if (i == 3)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_SGD);
+            else if (i == 4)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_USD);
+            else if (i == 5)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_THB);
+            else if (i == 6)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_KRW);
+            else if (i == 7)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_MYR);
+            else if (i == 8)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_GBP);
+            else if (i == 9)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_JPY);
+            else if (i == 10)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_HKD);
+            else if (i == 11)
+                converter[i] = config.Read("CONVERSION", Config.PARAM_CONVERSION_TWD);
+        }
         File.WriteAllText(datapath, "");
+        transaksi.AddConverter(converter);
+        readEur = transaksi.converter[0];
+        readAud = transaksi.converter[1];
+        readCny = transaksi.converter[2];
+        readSgd = transaksi.converter[3];
+        readUsd = transaksi.converter[4];
+        readThb = transaksi.converter[5];
+        readKrw = transaksi.converter[6];
+        readMyr = transaksi.converter[7];
+        readGbp = transaksi.converter[8];
+        readJpy = transaksi.converter[9];
+        readHkd = transaksi.converter[10];
+        readTwd = transaksi.converter[11];
     }
 
     private async Task CurrencyDetail()

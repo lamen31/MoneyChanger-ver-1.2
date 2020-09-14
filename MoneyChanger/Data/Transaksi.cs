@@ -8,6 +8,7 @@ namespace MoneyChanger.Data
     public class Transaksi
     {
         public string totalcash { get; set; }
+        public string[] converter { get; set; }
         public class Acceptor
         {
             public string Type { get; set; }
@@ -46,6 +47,10 @@ namespace MoneyChanger.Data
         {
             int result = listacceptor.Count();
             return result;
+        }
+        public void AddConverter(string[] strconverter)
+        {
+            converter = strconverter;
         }
         public void AddTotalCash(string strtotalcash)
         {

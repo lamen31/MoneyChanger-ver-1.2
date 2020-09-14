@@ -6,6 +6,8 @@
 @inject BillAcceptor acceptor
 @inject Transaksi transaksi
 @inject TimerSet timer  
+@inject CashDispenser cashdispenser
+@inject Config config
 
 <!-- ======= Hero Section ======= -->
 <section id="hero">
@@ -58,7 +60,7 @@
             <td></td>
             <td></td>
         </tr>*@
-                        <tr style="background-color: rgb(219, 219, 219); font-weight: bold;">
+                        @*<tr style="background-color: rgb(219, 219, 219); font-weight: bold;">
                             <th scope="row">Total</th>
                             <td>
                                 <ul style="color: black;">@tipeuang @nilaiuang</ul>
@@ -68,7 +70,7 @@
                                 <ul style="color: black;"></ul>
                                 <ul style="color: black;"></ul>
                             </td>
-                        </tr>
+                        </tr>*@
                     </tbody>
                 </table>
 
@@ -150,6 +152,21 @@
     private bool readflag = false;
     private int time = 1000;
     private bool loopBill = false;
+    private string readPort;
+    private int Port;
+
+    private string readEur;
+    private string readAud;
+    private string readCny;
+    private string readSgd;
+    private string readUsd;
+    private string readThb;
+    private string readKrw;
+    private string readMyr;
+    private string readGbp;
+    private string readJpy;
+    private string readHkd;
+    private string readTwd;
 
     protected override async Task OnInitializedAsync()
     {
@@ -157,6 +174,26 @@
         //timer.SetTimer(time);
         //timer.onelapsed += TimeHandle;
         await Task.Delay(2000);
+
+        readEur = transaksi.converter[0];
+        readAud = transaksi.converter[1];
+        readCny = transaksi.converter[2];
+        readSgd = transaksi.converter[3];
+        readUsd = transaksi.converter[4];
+        readThb = transaksi.converter[5];
+        readKrw = transaksi.converter[6];
+        readMyr = transaksi.converter[7];
+        readGbp = transaksi.converter[8];
+        readJpy = transaksi.converter[9];
+        readHkd = transaksi.converter[10];
+        readTwd = transaksi.converter[11];
+
+        readPort = config.Read("PORT", Config.PARAM_PORT_CASH_DISPENSER);
+        Port = ushort.Parse(readPort);
+        cashdispenser.PortOpen(Port);
+        cashdispenser.Reset();
+        cashdispenser.Config();
+
         totaluang = 0;
         transaksi.AddTotalCash(totaluang.ToString());
         loopBill = true;
@@ -193,76 +230,96 @@
     private int ConvertCash(string strtipe, string strnilai)
     {
         int result;
-        int convert = Convert.ToInt32(strnilai);
+        int conversion = 0;
+        int converter = Convert.ToInt32(strnilai);
         switch (strtipe)
         {
             case "USD":
                 {
-                    convert = convert * 14000;
+                    conversion = Convert.ToInt32(readUsd);
+                    converter = converter * conversion;
+                    //convert = convert * 14000;
                     break;
                 }
             case "EUR":
                 {
-                    convert = convert * 16000;
+                    conversion = Convert.ToInt32(readEur);
+                    converter = converter * conversion;
+                    //convert = convert * 16000;
                     break;
                 }
             case "JPY":
                 {
-                    convert = convert * 132;
+                    conversion = Convert.ToInt32(readJpy);
+                    converter = converter * conversion;
+                    //convert = convert * 132;
                     break;
                 }
             case "CNY":
                 {
-                    convert = convert * 2000;
-                    break;
-                }
-            case "KRW":
-                {
-                    convert = convert * 12;
+                    conversion = Convert.ToInt32(readCny);
+                    converter = converter * conversion;
+                    //convert = convert * 2000;
                     break;
                 }
             case "GBP":
                 {
-                    convert = convert * 18000;
+                    conversion = Convert.ToInt32(readGbp);
+                    converter = converter * conversion;
+                    //convert = convert * 18000;
                     break;
                 }
             case "AUD":
                 {
-                    convert = convert * 10000;
+                    conversion = Convert.ToInt32(readAud);
+                    converter = converter * conversion;
+                    //convert = convert * 10000;
                     break;
                 }
             case "TWD":
                 {
-                    convert = convert * 477;
+                    conversion = Convert.ToInt32(readTwd);
+                    converter = converter * conversion;
+                    //convert = convert * 477;
                     break;
                 }
-            case "PHP":
+            case "KRW":
                 {
-                    convert = convert * 282;
+                    conversion = Convert.ToInt32(readKrw);
+                    converter = converter * conversion;
+                    //convert = convert * 282;
                     break;
                 }
             case "HKD":
                 {
-                    convert = convert * 2000;
+                    conversion = Convert.ToInt32(readHkd);
+                    converter = converter * conversion;
+                    //convert = convert * 2000;
                     break;
                 }
             case "SGD":
                 {
-                    convert = convert * 10000;
+                    conversion = Convert.ToInt32(readSgd);
+                    converter = converter * conversion;
+                    //convert = convert * 10000;
                     break;
                 }
             case "MYR":
                 {
-                    convert = convert * 3300;
+                    conversion = Convert.ToInt32(readMyr);
+                    converter = converter * conversion;
+                    //convert = convert * 3300;
                     break;
                 }
             case "THB":
                 {
-                    convert = convert * 453;
+                    conversion = Convert.ToInt32(readThb);
+                    converter = converter * conversion;
+                    //convert = convert * 453;
                     break;
                 }
         }
-        totaluang += convert;
+        totaluang += converter;
         result = totaluang;
         return result;
     }

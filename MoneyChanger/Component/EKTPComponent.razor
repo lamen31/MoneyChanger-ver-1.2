@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components
+@using MoneyChanger.Data 
+
+@inject Config config
 
 <!-- ======= Hero Section ======= -->
 <section id="hero" style="margin-top: 50px;">
@@ -76,6 +79,47 @@
 @code {
     [Parameter]
     public EventCallback<string> OnClick { get; set; }
+    private IntPtr hcontext = IntPtr.Zero;
+    byte[] pbPcid;
+    byte[] pbConf;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+
+        pbPcid = EKTP_Utility.StringToByte(EKTP_Utility.StringInsert(config.Read("EKTP", Config.PARAM_EKTP_PCID)));
+        pbConf = EKTP_Utility.StringToByte(EKTP_Utility.StringInsert(config.Read("EKTP", Config.PARAM_EKTP_PCID)));
+
+        Console.WriteLine("READ CID AND CONFIG SUCCESS");
+    }
+
+    private async Task scanKtp()
+    {
+        if(EKtp_Sdk.EktpEstablishContext(ref hcontext) == 0)
+        {
+            Console.WriteLine("EKTP ESTABLISH CONTEXT SUCCESS");
+            EKtp_Sdk.EktpSetAttrib(hcontext, EKtp_Sdk.EKTP_ATTR_PCID, pbPcid, pbPcid.Length);
+            EKtp_Sdk.EktpSetAttrib(hcontext, EKtp_Sdk.EKTP_ATTR_CONFIG, pbConf, pbConf.Length);
+            Console.WriteLine("EKTP SET ATTRIBUT SUCCESS");
+        }
+        await Task.Run(() => EKtp_Sdk.EktpConnect(ref hcontext, pbPcid, pbPcid.Length, pbConf, pbConf.Length));
+
+        int length = 2048;
+        byte[] tempbuffer = new byte[length];
+        int ret = -1;
+        ret = await Task.Run(() => EKtp_Sdk.ReadDemographic(hcontext, ref length, tempbuffer)).ConfigureAwait(false);
+        if (length == 0 || ret != 0)
+        {
+            Console.WriteLine("READ DEMOGRAPHIC FAILED");
+        }
+        byte[] demographic = new byte[length];
+        for(int i = 0; i < length; i++)
+        {
+            demographic[i] = tempbuffer[i];
+        }
+        Console.WriteLine("READ DEMOGRAPHIC SUCCESS");
+
+    }
 
     private void MenuVerification()
     {

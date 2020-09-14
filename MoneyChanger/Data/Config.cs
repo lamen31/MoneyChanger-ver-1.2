@@ -16,12 +16,15 @@ namespace MoneyChanger.Data
         public const string PARAM_CONVERSION_SGD = "param.conversion.sgd";
         public const string PARAM_CONVERSION_USD = "param.conversion.usd";
         public const string PARAM_CONVERSION_THB = "param.conversion.thb";
-        public const string PARAM_CONVERSION_PHP = "param.conversion.php";
+        public const string PARAM_CONVERSION_KRW = "param.conversion.krw";
         public const string PARAM_CONVERSION_MYR = "param.conversion.myr";
         public const string PARAM_CONVERSION_GBP = "param.conversion.gbp";
         public const string PARAM_CONVERSION_JPY = "param.conversion.jpy";
         public const string PARAM_CONVERSION_HKD = "param.conversion.hkd";
         public const string PARAM_CONVERSION_TWD = "param.conversion.twd";
+        public const string PARAM_EKTP_PCID = "param.ektp.pcid";
+        public const string PARAM_EKTP_CONF = "param.ektp.conf";
+        public const string PARAM_EKTP_USB = "param.ektp.usb";
         public const string PARAM_PORT_BILL_ACCEPTOR = "param.port.bill.acceptor";
         public const string PARAM_PORT_CASH_DISPENSER = "param.port.cash.dispenser";
 
